@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Minimal Landing — Your Product</title>
+  <meta name="description" content="A clean, single-file landing page (HTML/CSS/JS)" />
+  <style>
+    :root{
+      --bg:#0f1724; --card:#0b1220; --muted:#98a0b3; --accent:#6ee7b7; --glass: rgba(255,255,255,0.04);
+      --radius:14px; --fw-600:600;
+      color-scheme: dark;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial; background:linear-gradient(180deg,#081226 0%, #071126 60%); color:#e6eef8}
+    a{color:var(--accent);text-decoration:none}
+    header{display:flex;align-items:center;justify-content:space-between;padding:20px 28px;backdrop-filter: blur(6px);}
+    .logo{display:flex;gap:12px;align-items:center}
+    .logo .mark{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,#06b6d4,#7c3aed);display:grid;place-items:center;font-weight:700}
+    nav{display:flex;gap:18px;align-items:center}
+    .btn{background:linear-gradient(90deg,#10b981,#06b6d4);padding:10px 16px;border-radius:10px;font-weight:600;color:#022;box-shadow:0 6px 18px rgba(6,182,129,0.12)}
+    .container{max-width:1100px;margin:0 auto;padding:24px}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;padding:40px 0}
+    .eyebrow{color:var(--muted);font-size:13px;margin-bottom:12px}
+    h1{font-size:38px;margin:0 0 12px;line-height:1.05}
+    p.lead{color:var(--muted);margin:0 0 18px}
+    .actions{display:flex;gap:12px;margin-top:10px}
+
+    /* Card preview */
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02)); border-radius:16px;padding:20px;box-shadow: 0 8px 30px rgba(2,6,23,0.6)}
+    .preview{height:320px;border-radius:12px;display:flex;flex-direction:column;gap:10px;padding:14px;background:linear-gradient(180deg,#07121b,#071221);overflow:hidden}
+    .preview .top{display:flex;justify-content:space-between;align-items:center}
+    .dot{width:12px;height:12px;border-radius:50%;background:#ff5f56;box-shadow:0 0 0 6px rgba(255,95,86,0.05) inset}
+
+    /* features */
+    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:28px 0}
+    .feature{background:var(--glass);padding:18px;border-radius:12px}
+    .feature h4{margin:0 0 8px}
+    .feature p{margin:0;color:var(--muted);font-size:14px}
+
+    /* signup */
+    .signup{margin:30px 0;display:flex;gap:8px}
+    input[type=email]{flex:1;padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:inherit}
+    button[type=submit]{padding:12px 16px;border-radius:10px;border:0;background:var(--accent);font-weight:700;color:#042;}
+
+    footer{padding:28px 0;border-top:1px solid rgba(255,255,255,0.03);color:var(--muted);font-size:13px}
+
+    /* responsive */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr;}
+      .features{grid-template-columns:repeat(2,1fr)}
+      nav{display:none}
+    }
+    @media (max-width:560px){
+      .features{grid-template-columns:1fr}
+      h1{font-size:28px}
+    }
+
+    /* small helpers */
+    .kicker{display:inline-block;padding:6px 10px;border-radius:999px;background:linear-gradient(90deg,rgba(110,231,183,0.08), rgba(9,122,118,0.04));color:var(--accent);font-weight:600;font-size:13px}
+  </style>
+</head>
+<body>
+  <header class="container">
+    <div class="logo">
+      <div class="mark">LP</div>
+      <div>
+        <div style="font-weight:700">Minimal Studio</div>
+        <div style="font-size:12px;color:var(--muted)">Simple single-file template</div>
+      </div>
+    </div>
+    <nav>
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#contact">Contact</a>
+      <a class="btn" href="#get">Get Started</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Trusted by makers & small teams</div>
+        <h1>Launch faster with a clean landing page — ready in one file.</h1>
+        <p class="lead">A tiny, elegant landing page that you can edit in any text editor. Includes a hero, feature grid and a simple signup form with basic validation.</p>
+        <div class="actions">
+          <a class="btn" id="cta" href="#get">Start free</a>
+          <a href="#features" style="align-self:center;padding:10px 12px;background:transparent;border-radius:10px;border:1px solid rgba(255,255,255,0.04)">Learn more</a>
+        </div>
+
+        <div class="features" id="features">
+          <div class="feature">
+            <h4>Small & fast</h4>
+            <p>Single HTML file, minimal CSS and vanilla JS — simple to host anywhere.</p>
+          </div>
+          <div class="feature">
+            <h4>Responsive</h4>
+            <p>Built with a grid-first layout so it looks great on phones and desktops.</p>
+          </div>
+          <div class="feature">
+            <h4>Accessible</h4>
+            <p>Keyboard-friendly focus states and semantic HTML to start from a good baseline.</p>
+          </div>
+        </div>
+
+        <form id="signup" class="signup" onsubmit="return handleSignup(event)">
+          <input id="email" type="email" placeholder="Enter your email" aria-label="Email address" required />
+          <button type="submit">Get early access</button>
+        </form>
+
+        <p style="color:var(--muted);font-size:13px">No credit card required • Unsubscribe anytime</p>
+      </div>
+
+      <aside class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px">
+          <div style="display:flex;gap:10px;align-items:center">
+            <div style="width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,#7c3aed,#06b6d4);display:grid;place-items:center;font-weight:700">PR</div>
+            <div>
+              <div style="font-weight:700">Product Preview</div>
+              <div style="font-size:12px;color:var(--muted)">Component-based mock</div>
+            </div>
+          </div>
+          <div style="font-size:12px;color:var(--muted)">v1.0</div>
+        </div>
+
+        <div class="preview">
+          <div class="top">
+            <div style="display:flex;gap:8px;align-items:center"><span class="dot"></span><span class="dot" style="background:#ffbd2e"></span><span class="dot" style="background:#27c93f"></span></div>
+            <div style="font-size:12px;color:var(--muted)">Preview</div>
+          </div>
+
+          <div style="flex:1;display:grid;place-items:center">
+            <div style="text-align:center;opacity:0.95">
+              <div style="font-weight:700;font-size:18px;margin-bottom:8px">Beautiful UI kit</div>
+              <div style="color:var(--muted);font-size:13px">Use this block as a quick mock for your product showcase.</div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:10px;align-items:center">
+            <div style="flex:1;font-size:13px;color:var(--muted)">Join 1,200+ early adopters</div>
+            <div style="padding:8px 12px;background:rgba(255,255,255,0.03);border-radius:8px;font-weight:700">Try</div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section id="pricing">
+      <h2 style="margin-top:6px">Pricing & plan</h2>
+      <p class="lead" style="max-width:780px">Start free — upgrade when you need custom domains, analytics, or team seats.</p>
+
+      <div style="display:flex;gap:12px;margin-top:16px;flex-wrap:wrap">
+        <div style="flex:1;min-width:220px" class="card">
+          <h3 style="margin:0 0 6px">Free</h3>
+          <div style="font-weight:700;font-size:22px">$0</div>
+          <p style="color:var(--muted);margin-top:8px">Basic hosting, email signup, 1 project</p>
+        </div>
+
+        <div style="flex:1;min-width:220px" class="card">
+          <h3 style="margin:0 0 6px">Pro</h3>
+          <div style="font-weight:700;font-size:22px">$8 / month</div>
+          <p style="color:var(--muted);margin-top:8px">Custom domain, analytics, 5 projects</p>
+        </div>
+
+        <div style="flex:1;min-width:220px" class="card">
+          <h3 style="margin:0 0 6px">Team</h3>
+          <div style="font-weight:700;font-size:22px">$29 / month</div>
+          <p style="color:var(--muted);margin-top:8px">Unlimited projects, team members, priority support</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" style="margin-top:28px">
+      <h2>Contact</h2>
+      <p class="lead">Questions? Email <a href="mailto:hello@example.com">hello@example.com</a> or fill the quick note below.</p>
+
+      <form style="display:grid;gap:8px;max-width:680px">
+        <input placeholder="Your name" />
+        <input placeholder="Email" />
+        <textarea rows="4" placeholder="Message"></textarea>
+        <button class="btn" type="button">Send message</button>
+      </form>
+    </section>
+
+    <footer>
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+        <div>© <strong>Minimal Studio</strong> — Built with ❤️</div>
+        <div style="color:var(--muted);font-size:13px">Made for quick prototypes & demos</div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const href = a.getAttribute('href');
+        if(href.length>1){
+          e.preventDefault();
+          document.querySelector(href)?.scrollIntoView({behavior:'smooth',block:'start'});
+        }
+      })
+    })
+
+    // Simple signup handler — does basic validation and shows a friendly message
+    function handleSignup(e){
+      e.preventDefault();
+      const input = document.getElementById('email');
+      const val = (input.value||"").trim();
+      if(!val || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(val)){
+        input.focus();
+        alert('Please enter a valid email address');
+        return false;
+      }
+      // Simulate sending
+      const old = input.value;
+      input.value = '';
+      alert('Thanks! We\'ll be in touch — ' + old);
+      return false;
+    }
+
+    // Small accessibility improvement: focus outline when tabbing
+    (function(){
+      function handleFirstTab(e) {
+        if (e.key === 'Tab') document.body.classList.add('show-focus');
+      }
+      window.addEventListener('keydown', handleFirstTab, { once: true });
+      const style = document.createElement('style');
+      style.innerHTML = '.show-focus :focus{outline:2px solid rgba(110,231,183,0.25);outline-offset:3px;border-radius:6px}';
+      document.head.appendChild(style);
+    })();
+  </script>
+</body>
+</html>
